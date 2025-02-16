@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表白网站</title>
+    <style>
+        body {
+            background-color: pink;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            padding-top: 150px;
+            overflow: hidden;  /* 防止内容超出视口 */
+        }
+        #message {
+            font-size: 30px;
+            color: white;
+            font-weight: bold;
+            transition: opacity 0.5s, top 0.3s;
+            position: relative;
+            top: 0;
+        }
+        #heart {
+            font-size: 150px;
+            color: white;
+            transition: transform 0.3s, left 0.3s;
+            position: relative;
+            left: 0;
+        }
+        #btn-can, #btn-no {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 20px;
+            cursor: pointer;
+            border-radius: 5px;
+            border: none;
+            transition: transform 0.3s, left 0.3s;
+            position: relative;
+        }
+        #btn-can {
+            background-color: #4CAF50;
+            color: white;
+        }
+        #btn-no {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+     <div id="heart">💖</div>
+    <div id="message">可以成为我的恋人吗？</div>
+    <button id="btn-no">不要</button>
+    <button id="btn-can">可以</button>
+
+    <script>
+        let scaleFactor = 1;
+        let clickCount = 0;
+        const btnCan = document.getElementById('btn-can');
+        const btnNo = document.getElementById('btn-no');
+        const message = document.getElementById('message');
+        const heart = document.getElementById('heart');
+
+        const noButtonTexts = [
+            "？你认真的？",
+            "要不要再想想？",
+            "不许选这个",
+            "我会伤心的",
+            "不行˃ʍ˂"
+        ];
+
+        // 点击“不要”按钮时
+        btnNo.addEventListener('click', function() {
+            if (clickCount < noButtonTexts.length) {
+                btnNo.textContent = noButtonTexts[clickCount];
+                clickCount++;
+            } else {
+                btnNo.textContent = noButtonTexts[noButtonTexts.length - 1];
+            }
+
+            scaleFactor += 0.1;  // 每次点击增大scaleFactor
+            btnCan.style.transform = 'scale(' + scaleFactor + ')';  // 放大“可以”按钮
+            btnNo.style.left = -(scaleFactor * 30) + 'px';  // “不要”按钮向右移动
+            heart.style.top = -(scaleFactor * 20) + 'px';  // 心形向上移动
+            message.style.top = -(scaleFactor * 20) + 'px';  // 文字向上移动
+        });
+
+        // 点击“可以”按钮时
+        btnCan.addEventListener('click', function() {
+            message.textContent = '!!!喜欢你!!(=^▽^=)';  // 修改提示文本为“!!!喜欢你!!(=^▽^=)”
+            message.style.opacity = 1;  // 显示“喜欢你”
+            // 隐藏按钮
+            btnCan.style.display = 'none';
+            btnNo.style.display = 'none';
+        });
+    </script>
+    </script>
+</body>
+</html>
